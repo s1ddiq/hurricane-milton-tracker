@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hurricane Milton Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a1e44; /* Dark blue */
+            color: white; /* White text */
+            font-family: 'Fredoka', sans-serif; /* Fredoka font */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5em;
+        }
+        .countdown {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        iframe {
+            margin-top: 20px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hurricane Milton Tracker</h1>
+    <p class="countdown">Estimated Time of Arrival: <span id="countdown"></span></p>
+
+    <!-- Tracker iframe -->
+    <img src="https://d3i6fh83elv35t.cloudfront.net/static/2024/10/20242821510-20242822040-ABI-AL142024-GEOCOLOR-1000x1000.gif" alt="Hurricane Milton"> <br>
+    
+    <iframe width="667" height="343" src="https://w2.countingdownto.com/5824633" frameborder="0"></iframe>
+
+
+
+
+    <!-- <iframe src="https://www.pbs.org/newshour/data/hurricane-tracker/?name=Milton&amp;lat=28&amp;lon=-85&amp;zoom=5&amp;follow=true" width="500" height="700"></iframe> <br> -->
+
+    <script>
+        // Set the date we're counting down to (Wednesday 2 PM)
+        const countdownDate = new Date('2024-10-09T14:00:00').getTime(); // Replace YYYY-MM-DD with the actual date
+
+        // Update the countdown every second
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            // Time calculations for days, hours, minutes, and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="countdown"
+            document.getElementById('countdown').innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // If the countdown is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById('countdown').innerHTML = "Hurricane Milton Update!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
